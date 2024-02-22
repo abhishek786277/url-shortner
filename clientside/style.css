@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    background-color: black;
+    height: max-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    gap:16px;
+}
+
+#url,
+#shorturl {
+    width: 50vh;
+    padding: 1rem;
+    font-size: medium;
+    border-radius: 8px;
+}
+
+#shorturl {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+button {
+    height: 8vh;
+    width: 20vh;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: medium;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+button:hover {
+    background-color: grey;
+    color: white;
+}

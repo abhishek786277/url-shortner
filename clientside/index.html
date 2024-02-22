@@ -1,0 +1,76 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Url-Shortner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Welcome to Quicklink</h1>
+      <h2>Url-Shortner Build Strong Digital Connections</h2>
+      <div>
+        <input
+          type="url"
+          name="url"
+          id="url"
+          placeholder="https://www.example.com/"
+        />
+        <button id="submit">Submit</button>
+      </div>
+      <div>
+        <input type="text" name="shorturl" id="shorturl" />
+        <button id="search">Search</button>
+      </div>
+    </main>
+
+    <script>
+      console.log("hiii");
+      const typedurl = document.getElementById("url");
+      const geturl = document.getElementById("shorturl");
+      const submit = document.getElementById("submit");
+      const search = document.getElementById("search");
+      let shortid;
+      submit.addEventListener("click", () => {
+        const data = {
+          url: typedurl.value,
+        };
+
+        postData(data);
+        async function postData(url) {
+          const response = await fetch("http://localhost:3000/url", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(url),
+          });
+          shortid = await response.json();
+          console.log(shortid);
+          if (shortid.id) {
+            geturl.value = shortid.id;
+            search.disabled = false;
+          } else {
+            geturl.value = shortid.error;
+            search.disabled = true;
+          }
+        }
+      });
+
+      search.addEventListener("click", () => {
+        let searchvalue = geturl.value;
+        searchurl();
+        async function searchurl() {
+          const response = await fetch(`http://localhost:3000/${searchvalue}`);
+          // console.log(response);
+          const res = await response.json();
+          console.log(res.geturl);
+          // window.location.href = res.geturl;
+          location.assign(`${res.geturl}`);
+          // console.log(window.location.host=null);
+        }
+      });
+    </script>
+  </body>
+</html>
